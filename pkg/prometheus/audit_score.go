@@ -8,13 +8,20 @@ import (
 
 type AuditScoreMetadata struct {
 	Hostname string
+	Prefix   string
 }
 
 // AuditResult generates prometheus metrics
 func AuditScore(item audit.Item, metadata AuditScoreMetadata) string {
 
+	prefix := ""
+	if metadata.Prefix != "" {
+		prefix = metadata.Prefix + "_"
+	}
+
 	return fmt.Sprintf(
-		`audit_score{id="%s",host="%s"} %.2f`,
+		`%saudit_score{id="%s",host="%s"} %.2f`,
+		prefix,
 		item.ID,
 		metadata.Hostname,
 		*item.Score,
