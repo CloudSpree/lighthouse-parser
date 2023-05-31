@@ -13,9 +13,9 @@ type Item struct {
 }
 
 type Environment struct {
-	NetworkUserAgent string `json:"networkUserAgent"`
-	HostUserAgent    string `json:"hostUserAgent"`
-	BenchmarkIndex   int    `json:"benchmarkIndex"`
+	NetworkUserAgent string  `json:"networkUserAgent"`
+	HostUserAgent    string  `json:"hostUserAgent"`
+	BenchmarkIndex   float32 `json:"benchmarkIndex"`
 }
 
 type Category struct {
