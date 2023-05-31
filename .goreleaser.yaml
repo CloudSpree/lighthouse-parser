@@ -12,7 +12,7 @@ builds:
     goos:
       - linux
       - darwin
-    main: ./cmd/metrics/main.go
+    main: ./cmd/main.go
 archives:
   - replacements:
       linux: Linux
