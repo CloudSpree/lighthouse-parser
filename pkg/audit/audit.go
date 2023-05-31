@@ -18,17 +18,23 @@ type Environment struct {
 	BenchmarkIndex   int    `json:"benchmarkIndex"`
 }
 
+type Category struct {
+	ID    string   `json:"id"`
+	Score *float32 `json:"score"`
+}
+
 type Report struct {
-	LighthouseVersion string          `json:"lighthouseVersion"`
-	RequestedURL      string          `json:"requestedUrl"`
-	MainDocumentURL   string          `json:"mainDocumentUrl"`
-	FinalDisplayedURL string          `json:"finalDisplayedUrl"`
-	FinalURL          string          `json:"finalUrl"`
-	FetchTime         string          `json:"fetchTime"`
-	GatherMode        string          `json:"gatherMode"`
-	UserAgent         string          `json:"userAgent"`
-	Environment       Environment     `json:"environment"`
-	Audits            map[string]Item `json:"audits"`
+	LighthouseVersion string              `json:"lighthouseVersion"`
+	RequestedURL      string              `json:"requestedUrl"`
+	MainDocumentURL   string              `json:"mainDocumentUrl"`
+	FinalDisplayedURL string              `json:"finalDisplayedUrl"`
+	FinalURL          string              `json:"finalUrl"`
+	FetchTime         string              `json:"fetchTime"`
+	GatherMode        string              `json:"gatherMode"`
+	UserAgent         string              `json:"userAgent"`
+	Environment       Environment         `json:"environment"`
+	Audits            map[string]Item     `json:"audits"`
+	Categories        map[string]Category `json:"categories"`
 }
 
 // NewFromFile creates Report from the provided file reference

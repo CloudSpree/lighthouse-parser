@@ -17,33 +17,50 @@ func ProcessReport(result audit.Report) (string, error) {
 	}
 
 	// prepare metadata for scores
-	scoresMetadata := prometheus.AuditScoreMetadata{
+	auditScoresMetadata := prometheus.AuditScoreMetadata{
 		Hostname: url.Hostname(),
 	}
 
-	numericValuesMetadata := prometheus.AuditNumericValueMetadata{
+	auditNumericValuesMetadata := prometheus.AuditNumericValueMetadata{
+		Hostname: url.Hostname(),
+	}
+
+	categoryScoresMetadata := prometheus.CategoryScoreMetadata{
 		Hostname: url.Hostname(),
 	}
 
 	// iterate through audits
-	scores := []string{}
-	numericValues := []string{}
+	auditScores := []string{}
+	auditNumericValues := []string{}
 
 	for _, a := range result.Audits {
 		if a.Score != nil {
-			scores = append(scores, prometheus.AuditScore(a, scoresMetadata))
+			auditScores = append(auditScores, prometheus.AuditScore(a, auditScoresMetadata))
 		}
 
 		if a.NumericValue != nil {
-			numericValues = append(numericValues, prometheus.AuditNumericValue(a, numericValuesMetadata))
+			auditNumericValues = append(auditNumericValues, prometheus.AuditNumericValue(a, auditNumericValuesMetadata))
+		}
+	}
+
+	// iterate through categories
+	categoryScores := []string{}
+
+	for _, c := range result.Categories {
+		if c.Score != nil {
+			categoryScores = append(categoryScores, prometheus.CategoryScore(c, categoryScoresMetadata))
 		}
 	}
 
 	// decorate metrics
-	scores = append(scores, "")
-	scores = append([]string{"# TYPE audit_score gauge"}, scores...)
-	numericValues = append(numericValues, "")
-	numericValues = append([]string{"# TYPE audit_numeric_value gauge"}, numericValues...)
+	auditScores = append(auditScores, "")
+	auditScores = append([]string{"# TYPE audit_score gauge"}, auditScores...)
 
-	return strings.Join(scores, "\n") + strings.Join(numericValues, "\n"), nil
+	auditNumericValues = append(auditNumericValues, "")
+	auditNumericValues = append([]string{"# TYPE audit_numeric_value gauge"}, auditNumericValues...)
+
+	categoryScores = append(categoryScores, "")
+	categoryScores = append([]string{"# TYPE category_score gauge"}, categoryScores...)
+
+	return strings.Join(auditScores, "\n") + strings.Join(auditNumericValues, "\n") + strings.Join(categoryScores, "\n"), nil
 }
