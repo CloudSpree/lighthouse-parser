@@ -1,13 +1,15 @@
 # Lighouse results Prometheus exporter
 
 Simple tool for parsing Lighthouse results (JSON) producing Prometheus metrics
-for `score` and `numericValue`.
+for audit score and numericValue and category score.
 
 ## example
 
 ```bash
 go run cmd/main.go -file ./test.json -commit 940819b | curl --data-binary @- http://localhost:9091/metrics/job/some_job
 ```
+
+The best way to use this tool is to push metrics for the give URL to the same category e.g. `job/some_job`. Using multiple instances might introduce the duplicates hence avoid stuff like `job/some_job/instance/commit/${COMMIT_SHA}`.
 
 ## output
 
