@@ -6,7 +6,7 @@ for `score` and `numericValue`.
 ## example
 
 ```bash
-go run cmd/main.go -file ./test.json | curl --data-binary @- http://localhost:9091/metrics/job/some_job
+go run cmd/main.go -file ./test.json -commit 940819b | curl --data-binary @- http://localhost:9091/metrics/job/some_job
 ```
 
 ## output
