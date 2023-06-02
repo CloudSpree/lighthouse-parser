@@ -11,6 +11,11 @@ go run cmd/main.go -file ./test.json -commit 940819b | curl --data-binary @- htt
 
 The best way to use this tool is to push metrics for the give URL to the same category e.g. `job/some_job`. Using multiple instances might introduce the duplicates hence avoid stuff like `job/some_job/instance/commit/${COMMIT_SHA}`.
 
+# prefix
+
+If needed, you can supply `-prefix` flag e.g. `-prefix=lighthouse`. 
+Resulting metrics will be like `lighthouse_audit_score` then.
+
 ## output
 
 ```
