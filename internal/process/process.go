@@ -9,7 +9,7 @@ import (
 	"github.com/orgs/CloudSpree/lighthouse-parser/pkg/prometheus"
 )
 
-func ProcessReport(result audit.Report, prefix string) (string, error) {
+func ProcessReport(result audit.Report, prefix string, commit string) (string, error) {
 	// get the base domain
 	url, err := url.Parse(result.FinalURL)
 	if err != nil {
@@ -20,16 +20,19 @@ func ProcessReport(result audit.Report, prefix string) (string, error) {
 	auditScoresMetadata := prometheus.AuditScoreMetadata{
 		Hostname: url.Hostname(),
 		Prefix:   prefix,
+		Commit:   commit,
 	}
 
 	auditNumericValuesMetadata := prometheus.AuditNumericValueMetadata{
 		Hostname: url.Hostname(),
 		Prefix:   prefix,
+		Commit:   commit,
 	}
 
 	categoryScoresMetadata := prometheus.CategoryScoreMetadata{
 		Hostname: url.Hostname(),
 		Prefix:   prefix,
+		Commit:   commit,
 	}
 
 	// iterate through audits

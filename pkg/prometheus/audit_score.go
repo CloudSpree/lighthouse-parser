@@ -9,6 +9,7 @@ import (
 type AuditScoreMetadata struct {
 	Hostname string
 	Prefix   string
+	Commit   string
 }
 
 // AuditResult generates prometheus metrics
@@ -20,10 +21,11 @@ func AuditScore(item audit.Item, metadata AuditScoreMetadata) string {
 	}
 
 	return fmt.Sprintf(
-		`%saudit_score{id="%s",host="%s"} %.2f`,
+		`%saudit_score{id="%s",host="%s",commit="%s"} %.2f`,
 		prefix,
 		item.ID,
 		metadata.Hostname,
+		metadata.Commit,
 		*item.Score,
 	)
 }
