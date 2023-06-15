@@ -1,4 +1,4 @@
-# Lighouse results Prometheus exporter
+# Lighthouse results Prometheus exporter
 
 Simple tool for parsing Lighthouse results (JSON) producing Prometheus metrics
 for audit score and numericValue and category score.
