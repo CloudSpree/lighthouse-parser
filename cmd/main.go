@@ -31,7 +31,7 @@ func main() {
 	}
 
 	// process report
-	metrics, err := process.ProcessReport(report, cfg.MetricsPrefix, cfg.Commit)
+	metrics, err := process.ProcessReport(report, cfg.MetricsPrefix, cfg.Commit, cfg.Format)
 	if err != nil {
 		log.Fatalf("coud not process report: %s", err)
 	}

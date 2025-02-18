@@ -1,3 +1,5 @@
 report.json
 dist
-
+.envrc
+.idea
+windows.exe
